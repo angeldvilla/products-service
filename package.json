@@ -1,5 +1,5 @@
 {
-  "name": "sexshop-catalog-service",
+  "name": "sexshop-products-service",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
