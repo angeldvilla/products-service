@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions name="CatalogService"
-             targetNamespace="http://www.example.org/catalog/"
-             xmlns:tns="http://www.example.org/catalog/"
+             targetNamespace="http://www.example.org/products/"
+             xmlns:tns="http://www.example.org/products/"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
              xmlns="http://schemas.xmlsoap.org/wsdl/">
 
     <!-- Define complex types for Product and Category -->
     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                xmlns:tns="http://www.example.org/catalog/"
-                targetNamespace="http://www.example.org/catalog/">
+                xmlns:tns="http://www.example.org/products/"
+                targetNamespace="http://www.example.org/products/">
 
         <!-- Define Product Type -->
         <xsd:complexType name="Product">
@@ -121,7 +121,7 @@
         <part name="stock" type="xsd:int"/>
     </message>
 
-    <portType name="CatalogPortType">
+    <portType name="ProductsPortType">
         <operation name="getCategories">
             <input message="tns:getCategoriesRequest"/>
             <output message="tns:getCategoriesResponse"/>
@@ -156,7 +156,7 @@
         </operation>
     </portType>
 
-    <binding name="CatalogBinding" type="tns:CatalogPortType">
+    <binding name="ProductsBinding" type="tns:ProductsPortType">
         <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="getCategories">
             <soap:operation soapAction="urn:getCategories"/>
@@ -232,9 +232,9 @@
         </operation>
     </binding>
 
-    <service name="CatalogService">
-        <port name="CatalogPort" binding="tns:CatalogBinding">
-            <soap:address location="http://localhost:3001/catalog"/>
+    <service name="ProductsService">
+        <port name="ProductsPort" binding="tns:ProductsBinding">
+            <soap:address location="http://localhost:3001/products"/>
         </port>
     </service>
 
