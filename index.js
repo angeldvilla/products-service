@@ -3,7 +3,7 @@ const soap = require('soap');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const catalogService = require('./src/service/soapService');
+const productsService = require('./src/service/soapService');
 const sequelize = require('./src/config/db');
 
 const wsdl = require('fs').readFileSync('src/catalog.wsdl', 'utf8');
@@ -11,7 +11,7 @@ const wsdl = require('fs').readFileSync('src/catalog.wsdl', 'utf8');
 
 const app = express();
 
-app.name = 'Catalog API';
+app.name = 'Products API';
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -29,7 +29,7 @@ sequelize.authenticate()
     .then(() => {
         console.log('Connection has been established successfully.');
         const server = app.listen(3001, function () {
-            soap.listen(server, '/catalog', catalogService, wsdl);
+            soap.listen(server, '/catalog', productsService, wsdl);
             console.log('SOAP server listening on port 3001');
         });
     })
