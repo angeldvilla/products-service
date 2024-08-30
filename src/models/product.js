@@ -40,12 +40,13 @@ Product.belongsTo(Category, {
     foreignKey: {
         allowNull: false
     },
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE', onUpdate: 'CASCADE'
 });
 Category.hasMany(Product, {
     foreignKey: {
         allowNull: false
-    }
+    },
+    onDelete: 'CASCADE', onUpdate: 'CASCADE'
 });
 
 module.exports = Product;
