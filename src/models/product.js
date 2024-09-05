@@ -29,6 +29,14 @@ const Product = sequelize.define('Product', {
         type: DataTypes.STRING,
         allowNull: true,
     },
+    category_id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+            model: Category,
+            key: 'id',
+        },
+    }
 },
     {
         timestamps: false
@@ -36,17 +44,7 @@ const Product = sequelize.define('Product', {
 );
 
 
-Product.belongsTo(Category, {
-    foreignKey: {
-        allowNull: false
-    },
-    onDelete: 'CASCADE', onUpdate: 'CASCADE'
-});
-Category.hasMany(Product, {
-    foreignKey: {
-        allowNull: false
-    },
-    onDelete: 'CASCADE', onUpdate: 'CASCADE'
-});
+Product.belongsTo(Category, { foreignKey: 'category_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+Category.hasMany(Product, { foreignKey: 'category_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = Product;
