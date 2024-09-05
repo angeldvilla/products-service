@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="CategoryService"
+             targetNamespace="http://www.example.org/categories/"
+             xmlns:tns="http://www.example.org/categories/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:tns="http://www.example.org/categories/"
+                targetNamespace="http://www.example.org/categories/">
+
+
+     <!-- Define Modelo de Categorias -->
+        <xsd:complexType name="Category">
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:string"/>
+                <xsd:element name="name" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+
+        <!-- Define Array de Categorias -->
+        <xsd:complexType name="CategoryArray">
+            <xsd:sequence>
+                <xsd:element name="category" type="tns:Category" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+
+    </xsd:schema>
+
+
+    <!-- Mensajes para obtener todas las categorias -->
+    <message name="getCategoriesRequest"/>
+    <message name="getCategoriesResponse">
+        <part name="categories" type="tns:CategoryArray"/>
+    </message>
+
+    <!-- Mensajes para crear una nueva categoria -->
+    <message name="createCategoryRequest">
+        <part name="name" type="xsd:string"/>
+    </message>
+    <message name="createCategoryResponse">
+        <part name="success" type="xsd:string"/>
+        <part name="categoryId" type="xsd:string"/>
+        <part name="name" type="xsd:string"/>
+    </message>
+
+
+    <portType name="CategoriesPortType">
+        <operation name="getCategories">
+            <input message="tns:getCategoriesRequest"/>
+            <output message="tns:getCategoriesResponse"/>
+        </operation>
+        <operation name="createCategory">
+            <input message="tns:createCategoryRequest"/>
+            <output message="tns:createCategoryResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="CategoriesBinding" type="tns:CategoriesPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getCategories">
+            <soap:operation soapAction="urn:getCategories"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="createCategory">
+            <soap:operation soapAction="urn:createCategory"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="CategoryService">
+        <port name="CategoryPort" binding="tns:CategoriesBinding">
+            <soap:address location="http://localhost:3001/categories"/>
+        </port>
+    </service>
+
+</definitions>
