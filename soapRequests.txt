@@ -1,0 +1,136 @@
+CATEGORIAS:
+
+
+VER
+----------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:cat="http://www.example.org/categories/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <cat:getCategories />
+    </soapenv:Body>
+</soapenv:Envelope>
+
+----------
+
+
+CREAR
+-----------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:cat="http://www.example.org/categories/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <cat:createCategory>
+        <name>BSDM</name>
+        </cat:createCategory>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+------------------
+
+
+
+
+
+PRODUCTOS:
+
+
+VER
+----------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:prod="http://www.example.org/products/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <prod:getProducts />
+    </soapenv:Body>
+</soapenv:Envelope>
+
+----------
+
+
+DETALLE
+-----------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:prod="http://www.example.org/products/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <prod:getProductDetails>
+        <id></id>  
+        </prod:getProductDetails>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+------------------
+
+
+CREAR
+-----------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:prod="http://www.example.org/products/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <prod:createProduct>
+        <name></name>
+        <description></description>
+        <price></price>
+        <stock></stock>
+        <imageUrl></imageUrl>
+        <category_id></category_id>    
+        </prod:createProduct>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+------------------
+
+
+ACTUALIZAR
+-----------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:prod="http://www.example.org/products/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <prod:updateProduct>
+        <id></id>
+        <name></name>
+        <description></description>
+        <price></price>
+        <stock></stock>
+        <imageUrl></imageUrl>
+        <category_id></category_id>    
+        </prod:updateProduct>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+------------------
+
+
+ELIMINAR
+-----------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:prod="http://www.example.org/products/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <prod:deleteProduct>
+        <id></id>
+        </prod:deleteProduct>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+------------------
+
+
+
+AJUSTAR STOCK
+-----------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:prod="http://www.example.org/products/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <prod:adjustStock>
+        <id></id>
+        <quantity></quantity>
+        </prod:adjustStock>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+------------------
