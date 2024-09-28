@@ -4,8 +4,8 @@ const Category = require('./models/category');
 
 sequelize.sync({ force: true })
     .then(() => {
-        console.log("Database & tables created!");
+        console.log("Base de datos sincronizada correctamente!");
     })
     .catch(err => {
-        console.error('Error syncing database:', err);
+        console.error('Error al sincronizar la base de datos:', err);
     });
