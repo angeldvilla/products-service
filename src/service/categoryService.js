@@ -26,13 +26,13 @@ const categoryService = {
             },
             createCategory: async function (args) {
                 try {
-                    const categorie = await Category.create(args);
-
                     const existingCategory = await Category.findOne({ where: { name: args.name } });
-
+                    
                     if (existingCategory) {
                         throw new Error('La categoria ya existe');
                     }
+                    
+                    const categorie = await Category.create(args);
 
                     return {
                         sucess: "Categoría creada exitosamente",
