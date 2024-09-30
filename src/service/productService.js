@@ -25,8 +25,8 @@ const productService = {
                     return { products: productResponse };
 
                 } catch (error) {
-                    console.error('Error fetching products:', error);
-                    throw new Error('Error fetching products');
+                    console.error('Error al obtener productos:', error);
+                    throw new Error('Error al obtener productos');
                 }
             },
             getProductDetails: async function (args) {
@@ -50,8 +50,8 @@ const productService = {
                     return { product: productResponse };
 
                 } catch (error) {
-                    console.error('Error fetching product details:', error);
-                    throw new Error('Error fetching product details');
+                    console.error('Error al obtener detalles del producto:', error);
+                    throw new Error('Error al obtener detalles del producto');
                 }
             },
             createProduct: async function (args) {
@@ -123,8 +123,8 @@ const productService = {
                     return { success: "Producto eliminado exitosamente" };
 
                 } catch (error) {
-                    console.error('Error deleting product:', error);
-                    throw new Error('Error deleting product');
+                    console.error('Error al eliminar el producto:', error);
+                    throw new Error('Error al eliminar el producto');
                 }
             },
             adjustStock: async function (args) {
