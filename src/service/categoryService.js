@@ -29,7 +29,7 @@ const categoryService = {
                     const existingCategory = await Category.findOne({ where: { name: args.name } });
                     
                     if (existingCategory) {
-                        throw new Error('La categoria ya existe');
+                        console.error('La categoria ya existe');
                     }
                     
                     const categorie = await Category.create(args);
