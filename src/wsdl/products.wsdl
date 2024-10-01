@@ -41,7 +41,21 @@
         <part name="id" type="xsd:string"/>
     </message>
     <message name="getProductDetailsResponse">
-        <part name="product" type="tns:ProductArray"/>
+        <part name="product" type="tns:Product"/>
+    </message>
+
+    <message name="getProductsByCategoryRequest">
+        <part name="category_name" type="xsd:string"/>
+    </message>
+    <message name="getProductsByCategoryResponse">
+        <part name="products" type="tns:ProductArray"/>
+    </message>
+
+    <message name="getProductByNameRequest">
+        <part name="product_name" type="xsd:string"/>
+    </message>
+    <message name="getProductByNameResponse">
+        <part name="product" type="tns:Product"/>
     </message>
 
     <message name="createProductRequest">
@@ -138,6 +152,25 @@
                 <soap:body use="literal"/>
             </output>
         </operation>
+        <operation name="getProductsByCategory">
+            <soap:operation soapAction="urn:getProductsByCategory"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="getProductByName">
+            <soap:operation soapAction="urn:getProductByName"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
         <operation name="createProduct">
             <soap:operation soapAction="urn:createProduct"/>
             <input>
