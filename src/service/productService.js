@@ -29,6 +29,8 @@ const productService = {
                     throw new Error('Error al obtener productos');
                 }
             },
+
+            /* Funciones para obtener detalles de un producto */
             getProductDetails: async function (args) {
                 try {
                     const product = await Product.findByPk(args.id, {
@@ -54,6 +56,66 @@ const productService = {
                     throw new Error('Error al obtener detalles del producto');
                 }
             },
+
+
+            /* Funciones para filtrar productos por categoria */
+            getProductsByCategory: async function (args) {
+                try {
+                    const products = await Product.findAll({
+                        where: { name: args.category_name },
+                        include: [Category]
+                    });
+
+                    if (!products) {
+                        console.error('No se encontraron productos para la categoría especificada');
+                    }
+
+                    const productResponse = products.map(product => {
+                        return {
+                            id: product.id,
+                            nombre: product.name,
+                            descripcion: product.description,
+                            precio: product.price,
+                            cantidad: product.stock,
+                            categoria: product.Category ? product.Category.name : null
+                        }
+                    })
+
+                    return { products: productResponse };
+
+                } catch (error) {
+                    console.error('Error al obtener productos por categoría:', error);
+                    throw new Error('Error al obtener productos por categoría');
+                }
+            },
+
+            /* Función para buscar un producto por nombre */
+            getProductByName: async function (args) {
+                try {
+                    const product = await Product.findOne({
+                        where: { name: args.product_name },
+                        include: [Category]  
+                    });
+
+                    if (!product) {
+                        console.error('Producto no encontrado');
+                    }
+
+                    return {
+                        id: product.id,
+                        nombre: product.name,
+                        descripcion: product.description,
+                        precio: product.price,
+                        cantidad: product.stock,
+                        categoria: product.Category ? product.Category.name : null
+                    };
+                } catch (error) {
+                    console.error('Error al obtener el producto por nombre:', error);
+                    throw new Error('Error al obtener el producto por nombre');
+                }
+            },
+
+            /* Funciones para crear productos */
             createProduct: async function (args) {
                 try {
                     const existingProduct = await Product.findOne({ where: { name: args.name } });
