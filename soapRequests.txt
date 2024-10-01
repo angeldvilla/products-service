@@ -63,6 +63,35 @@ DETALLE
 ------------------
 
 
+BUSCAR POR NOMBRE
+------------------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:prod="http://www.example.org/products/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <prod:getProductsByName>
+            <name>nombre_producto</name>
+        </prod:getProductsByName>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+------------------
+
+FILTRAR POR CATEGORIA
+------------------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:prod="http://www.example.org/products/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <prod:getProductsByCategory>
+            <category_name>nombre_categoria</category_name>
+        </prod:getProductsByCategory>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+------------------
+
+
 CREAR
 -----------
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
