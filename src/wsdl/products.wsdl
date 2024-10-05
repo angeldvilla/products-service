@@ -55,7 +55,7 @@
         <part name="product_name" type="xsd:string"/>
     </message>
     <message name="getProductByNameResponse">
-        <part name="product" type="tns:Product"/>
+        <part name="products" type="tns:ProductArray"/>
     </message>
 
     <message name="createProductRequest">
