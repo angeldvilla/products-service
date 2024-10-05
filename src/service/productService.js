@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
 const Category = require('../models/category');
+const { Op } = require('sequelize');
 
 const productService = {
     ProductService: {
@@ -62,12 +63,19 @@ const productService = {
             getProductsByCategory: async function (args) {
                 try {
                     const products = await Product.findAll({
-                        where: { name: args.category_name },
-                        include: [Category]
+                        include: [{
+                            model: Category,
+                            where: { name: {
+                                [Op.iLike]: args.category_name
+                            } }
+                        }]
                     });
 
-                    if (!products) {
+                    if (products.length === 0) {
                         console.error('No se encontraron productos para la categoría especificada');
+                        return {
+                           products: []
+                        };
                     }
 
                     const productResponse = products.map(product => {
@@ -92,23 +100,34 @@ const productService = {
             /* Función para buscar un producto por nombre */
             getProductByName: async function (args) {
                 try {
-                    const product = await Product.findOne({
-                        where: { name: args.product_name },
-                        include: [Category]  
+                    const products = await Product.findAll({
+                        where: { 
+                            name: {
+                                [Op.iLike]: args.product_name
+                            }
+                        },
+                        include: [Category]
                     });
-
-                    if (!product) {
+            
+                    if (products.length === 0) {
                         console.error('Producto no encontrado');
+                        return {
+                            products: []
+                        };
                     }
 
-                    return {
-                        id: product.id,
-                        nombre: product.name,
-                        descripcion: product.description,
-                        precio: product.price,
-                        cantidad: product.stock,
-                        categoria: product.Category ? product.Category.name : null
-                    };
+                    const productResponse = products.map(product => {
+                        return {
+                            id: product.id,
+                            nombre: product.name,
+                            descripcion: product.description,
+                            precio: product.price,
+                            cantidad: product.stock,
+                            categoria: product.Category ? product.Category.name : null
+                        }
+                    })
+
+                    return { products: productResponse };
                 } catch (error) {
                     console.error('Error al obtener el producto por nombre:', error);
                     throw new Error('Error al obtener el producto por nombre');
