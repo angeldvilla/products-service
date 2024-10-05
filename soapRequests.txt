@@ -70,7 +70,7 @@ BUSCAR POR NOMBRE
     <soapenv:Header/>
     <soapenv:Body>
         <prod:getProductsByName>
-            <name>nombre_producto</name>
+            <product_name>nombre_producto</product_name>
         </prod:getProductsByName>
     </soapenv:Body>
 </soapenv:Envelope>
