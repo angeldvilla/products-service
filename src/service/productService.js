@@ -38,7 +38,9 @@ const productService = {
                         include: [Category]
                     });
                     if (!product) {
-                        throw new Error('Producto no encontrado');
+                        return {
+                            message: 'Producto no encontrado',
+                        }
                     }
 
                     const productResponse = {
@@ -65,15 +67,18 @@ const productService = {
                     const products = await Product.findAll({
                         include: [{
                             model: Category,
-                            where: { name: {
-                                [Op.iLike]: args.category_name
-                            } }
-                        }]
+                            where: { 
+                                name: { 
+                                    [Op.like]: `%${args.category_name}%`
+                                } 
+                            }
+                        }],
                     });
 
                     if (products.length === 0) {
                         console.error('No se encontraron productos para la categoría especificada');
                         return {
+                           message: "No se encontraron productos para la categoría especificada",
                            products: []
                         };
                     }
@@ -98,20 +103,19 @@ const productService = {
             },
 
             /* Función para buscar un producto por nombre */
-            getProductByName: async function (args) {
+            getProductsByName: async function (args) {
                 try {
                     const products = await Product.findAll({
-                        where: { 
-                            name: {
-                                [Op.iLike]: args.product_name
-                            }
-                        },
-                        include: [Category]
+                        where: { name: {
+                            [Op.like]: `%${args.product_name}%`
+                        } },
+                        include: [Category],
                     });
             
                     if (products.length === 0) {
                         console.error('Producto no encontrado');
                         return {
+                            message: "Producto no encontrado",
                             products: []
                         };
                     }
@@ -140,7 +144,7 @@ const productService = {
                     const existingProduct = await Product.findOne({ where: { name: args.name } });
 
                     if (existingProduct) {
-                        throw new Error('El producto ya existe');
+                        return { message: 'El producto ya existe' }
                     }
 
                     const newProduct = await Product.create(args);
@@ -162,7 +166,7 @@ const productService = {
                 try {
                     const product = await Product.findByPk(args.id);
                     if (!product) {
-                        throw new Error('Producto no encontrado');
+                        return { message: 'Producto no encontrado' }
                     }
 
                     //Actualizar campos de producto
@@ -198,7 +202,7 @@ const productService = {
                 try {
                     const product = await Product.findByPk(args.id);
                     if (!product) {
-                        throw new Error('Producto no encontrado');
+                        return { message: 'Producto no encontrado' }
                     }
                     await product.destroy();
                     return { success: "Producto eliminado exitosamente" };
@@ -212,7 +216,7 @@ const productService = {
                 try {
                     const product = await Product.findByPk(args.id);
                     if (!product) {
-                        throw new Error('Producto no encontrado');
+                        return { message: 'Producto no encontrado' }
                     }
 
                     const newStock = product.stock + args.quantity;
