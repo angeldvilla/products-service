@@ -19,6 +19,21 @@
 CREATE DATABASE IF NOT EXISTS `products_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `products_db`;
 
+-- Volcando estructura para tabla products_db.brands
+CREATE TABLE IF NOT EXISTS `brands` (
+  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla products_db.brands: ~5 rows (aproximadamente)
+INSERT IGNORE INTO `brands` (`id`, `name`) VALUES
+	('d84b2b12-1f24-4db8-b44f-789d4f3eac68', 'Lovense'),
+	('e5b1c8d2-2f9d-4f7c-bf4e-2398f6b0d83c', 'We-Vibe'),
+	('f7d9e3b4-3c6f-4b8d-afe4-5a7c8d9e1a7b', 'Lelo'),
+	('g8a2e5b6-5c4f-4b8e-bd9e-4f7e5d9c1e3f', 'Satisfyer'),
+	('h9e4b7d6-6d7f-4c8d-afe6-2f9e5c0b7d8f', 'Fleshlight');
+
 -- Volcando estructura para tabla products_db.categories
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
@@ -28,11 +43,11 @@ CREATE TABLE IF NOT EXISTS `categories` (
 
 -- Volcando datos para la tabla products_db.categories: ~5 rows (aproximadamente)
 INSERT IGNORE INTO `categories` (`id`, `name`) VALUES
-	('4e3ac15f-6373-4c6b-8a16-7f9fbb8c77e4', 'Lubricantes'),
-	('67e29a88-f99d-4cb2-9e22-235fbb8c71d2', 'Aceites y Cosméticos'),
-	('a5d14c1b-72b8-4e02-9298-8e59b2c3d479', 'Lencería'),
-	('bb1ff4a2-4e88-4c34-b589-6e2e8f49e92e', 'Juegos y Accesorios'),
-	('f47ac10b-58cc-4372-a567-0e02b2c3d479', 'Juguetes');
+	('1a92f635-9e3d-4b02-80fc-7bfb8b14dffd', 'Vibradores'),
+	('bb1ff4a2-4e88-4c34-b589-6e2e8f49e92e', 'Lencería'),
+	('c2e2d635-2b4e-4f92-9cd2-b8e2f8a7dd3f', 'Lubricantes'),
+	('d2a8f6f2-0f94-4b53-8b6f-c8f9e3a4c2b1', 'Juegos y accesorios'),
+	('f6b1c2e8-4d7a-4e68-8e3f-5d8f6c7e9b2a', 'Juguetes para pareja');
 
 -- Volcando estructura para tabla products_db.products
 CREATE TABLE IF NOT EXISTS `products` (
@@ -41,39 +56,33 @@ CREATE TABLE IF NOT EXISTS `products` (
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `stock` int(11) NOT NULL,
-  `imageUrl` varchar(255) DEFAULT NULL,
+  `discount` int(11) DEFAULT 0,
   `category_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `brand_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
-  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `brand_id` (`brand_id`),
+  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `products_ibfk_2` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla products_db.products: ~24 rows (aproximadamente)
-INSERT IGNORE INTO `products` (`id`, `name`, `description`, `price`, `stock`, `imageUrl`, `category_id`) VALUES
-	('0ff6b6f2-2a91-487e-bd95-f2f606cf18a1', 'Lubricante Anal', 'Lubricante especializado para uso anal', 5945.00, 20, NULL, '4e3ac15f-6373-4c6b-8a16-7f9fbb8c77e4'),
-	('12550cc7-f264-4e2b-8a6d-30d69e606da6', 'Plumero Erótico', 'Plumero para caricias y estimulación sensorial', 143459.00, 25, NULL, 'bb1ff4a2-4e88-4c34-b589-6e2e8f49e92e'),
-	('34f85e4d-abe9-4324-9c97-49a89bc50891', 'Gel Estimulante para Parejas', 'Gel con efecto calor para intensificar sensaciones', 69659.00, 15, NULL, '4e3ac15f-6373-4c6b-8a16-7f9fbb8c77e4'),
-	('3fa8d95f-0713-4c9d-b49f-663db7cb9337', 'Bolas Chinas', 'Bolas de silicona para ejercicios Kegel', 65559.00, 12, NULL, 'f47ac10b-58cc-4372-a567-0e02b2c3d479'),
-	('426b5f04-70ad-4f4e-8e18-c79822a7c1de', 'Polvo Corporal Brillante', 'Polvo con brillo para el cuerpo con aroma floral', 53659.00, 15, NULL, '67e29a88-f99d-4cb2-9e22-235fbb8c71d2'),
-	('5c54a78f-18b7-421f-bd53-1c703f853f46', 'Lubricante de Silicona', 'Lubricante duradero a base de silicona', 73359.00, 25, NULL, '4e3ac15f-6373-4c6b-8a16-7f9fbb8c77e4'),
-	('5df3a6ec-95a2-4260-a4f7-4e036c1a5a4c', 'Lubricante con Sabor', 'Lubricante comestible con sabor a frutas', 45059.00, 40, NULL, '4e3ac15f-6373-4c6b-8a16-7f9fbb8c77e4'),
-	('5f6c6112-2df1-4b17-935e-54b8cc4cbfeb', 'Vela de Masaje', 'Vela que se convierte en aceite de masaje cálido', 7995.00, 12, NULL, '67e29a88-f99d-4cb2-9e22-235fbb8c71d2'),
-	('61c5415c-85c0-46f0-8e71-3de5b27e9ed8', 'Bata de Satén', 'Bata de satén con detalles de encaje', 163959.00, 5, NULL, 'a5d14c1b-72b8-4e02-9298-8e59b2c3d479'),
-	('64b7e227-2f98-4746-8141-519199a314f2', 'Babydoll de Satén', 'Babydoll de satén con lazo frontal', 143459.00, 6, NULL, 'a5d14c1b-72b8-4e02-9298-8e59b2c3d479'),
-	('697e0472-d53f-4bde-a743-150034fa021b', 'Espuma de Baño Sensual', 'Espuma con fragancia afrodisíaca', 61459.00, 10, NULL, '67e29a88-f99d-4cb2-9e22-235fbb8c71d2'),
-	('773fa2db-3c45-44f0-98f2-9fbf1cb64e97', 'Esposas de Metal', 'Esposas metálicas con llaves incluidas', 102959.00, 18, NULL, 'bb1ff4a2-4e88-4c34-b589-6e2e8f49e92e'),
-	('7f9c8ac2-f5ea-42b3-b5c2-1d2c92db149e', 'Plug Anal', 'Plug de silicona para principiantes', 53659.00, 20, NULL, 'f47ac10b-58cc-4372-a567-0e02b2c3d479'),
-	('a01d5f60-5a0e-4c9b-b3ae-7430912c7a82', 'Anillo Vibrador', 'Anillo para pareja con función vibratoria', 81959.00, 10, NULL, 'f47ac10b-58cc-4372-a567-0e02b2c3d479'),
-	('a43bba9e-cd91-489b-b569-02dcae732a6f', 'Conjunto de Lencería Sexy', 'Conjunto de encaje con liguero', 188559.00, 7, NULL, 'a5d14c1b-72b8-4e02-9298-8e59b2c3d479'),
-	('ae5a08a3-1588-4d44-b54d-2cf85e3271b2', 'Aceite de Masaje comestible', 'Aceite corporal comestible con fragancia de vainilla', 40959.00, 22, NULL, '67e29a88-f99d-4cb2-9e22-235fbb8c71d2'),
-	('b20ec707-4f7e-4df8-8fe0-4314b7a9e070', 'Dados Eróticos', 'Juego de dados con posiciones y lugares', 32759.00, 50, NULL, 'bb1ff4a2-4e88-4c34-b589-6e2e8f49e92e'),
-	('b74e07a4-0107-4f8c-b9ad-276c71d3bb3d', 'Medias de Red', 'Medias de red con costura trasera', 40959.00, 25, NULL, 'a5d14c1b-72b8-4e02-9298-8e59b2c3d479'),
-	('d29d84d3-d482-4850-b731-5b6ea2356f3d', 'Kit de Cuerda y Venda', 'Kit de bondage con cuerda y venda para ojos', 102959.00, 20, NULL, 'bb1ff4a2-4e88-4c34-b589-6e2e8f49e92e'),
-	('d8b1a845-bb67-4903-936a-1686c1194c79', 'Lubricante a base de Agua', 'Lubricante íntimo suave y no pegajoso', 5125.00, 30, NULL, '4e3ac15f-6373-4c6b-8a16-7f9fbb8c77e4'),
-	('e91e9c44-c33b-4bfb-b65b-56f0d21b0011', 'Vibrador Clásico', 'Vibrador de silicona con 10 modos de vibración', 106559.00, 15, NULL, 'f47ac10b-58cc-4372-a567-0e02b2c3d479'),
-	('ee9b7d27-1441-48e9-8304-02c97b0c7046', 'Gel Besable', 'Gel comestible con efecto frío para masajes íntimos', 36859.00, 30, NULL, '67e29a88-f99d-4cb2-9e22-235fbb8c71d2'),
-	('f5a5873c-7f53-4024-afe9-3f468f3de7d5', 'Body de Encaje Transparente', 'Body ajustado con transparencias', 122959.00, 10, NULL, 'a5d14c1b-72b8-4e02-9298-8e59b2c3d479'),
-	('fbbd5e62-bb84-41c8-9913-c6a365a85a91', 'Consolador Realista', 'Consolador de gelatina con textura realista', 12505.00, 8, NULL, 'f47ac10b-58cc-4372-a567-0e02b2c3d479');
+-- Volcando datos para la tabla products_db.products: ~15 rows (aproximadamente)
+INSERT IGNORE INTO `products` (`id`, `name`, `description`, `price`, `stock`, `discount`, `category_id`, `brand_id`) VALUES
+	('a44ffde1-571c-4e8b-8db1-25a7df2e20f3', 'Vibrador Clásico', 'Vibrador de silicona con 10 modos de vibración', 106559.00, 15, 10, '1a92f635-9e3d-4b02-80fc-7bfb8b14dffd', 'd84b2b12-1f24-4db8-b44f-789d4f3eac68'),
+	('b99d1c2f-1234-4f7a-8db1-5e7f2d9a1c4f', 'Vibrador de Punto G', 'Vibrador con diseño especial para estimular el punto G', 128999.00, 20, 15, '1a92f635-9e3d-4b02-80fc-7bfb8b14dffd', 'e5b1c8d2-2f9d-4f7c-bf4e-2398f6b0d83c'),
+	('c55e3f9d-6789-4e3a-bfe4-3d7c6e9a8b1f', 'Mini Vibrador Portátil', 'Vibrador pequeño y discreto', 59999.00, 30, 5, '1a92f635-9e3d-4b02-80fc-7bfb8b14dffd', 'f7d9e3b4-3c6f-4b8d-afe4-5a7c8d9e1a7b'),
+	('d88f5d7e-2345-4a6b-8fde-4f8b7d1e8c7e', 'Conjunto de Lencería Sexy', 'Conjunto de encaje con liguero', 188559.00, 10, 0, 'bb1ff4a2-4e88-4c34-b589-6e2e8f49e92e', 'g8a2e5b6-5c4f-4b8e-bd9e-4f7e5d9c1e3f'),
+	('e45c9b6e-3456-4c7e-b6f7-3a8b7e9f7c9d', 'Body de Encaje Transparente', 'Body ajustado con transparencias', 122959.00, 12, 20, 'bb1ff4a2-4e88-4c34-b589-6e2e8f49e92e', 'h9e4b7d6-6d7f-4c8d-afe6-2f9e5c0b7d8f'),
+	('f33e4d8f-4567-4e8c-afd4-5e9a7d2f8b1c', 'Babydoll de Satén', 'Babydoll de satén con lazo frontal', 143459.00, 8, 10, 'bb1ff4a2-4e88-4c34-b589-6e2e8f49e92e', 'd84b2b12-1f24-4db8-b44f-789d4f3eac68'),
+	('g22f1a4b-5678-4e9a-8f2d-1b8f9c3e8d6a', 'Lubricante a base de Agua', 'Lubricante íntimo suave y no pegajoso', 5125.00, 25, 0, 'c2e2d635-2b4e-4f92-9cd2-b8e2f8a7dd3f', 'e5b1c8d2-2f9d-4f7c-bf4e-2398f6b0d83c'),
+	('h34b7d8f-6789-4f8c-bf7d-4a9b6e8c3d2a', 'Lubricante con Sabor', 'Lubricante comestible con sabor a frutas', 45059.00, 15, 5, 'c2e2d635-2b4e-4f92-9cd2-b8e2f8a7dd3f', 'f7d9e3b4-3c6f-4b8d-afe4-5a7c8d9e1a7b'),
+	('i55d8c9a-7890-4d6b-a9e3-5e8b7c4f1d9e', 'Lubricante Anal', 'Lubricante especializado para uso anal', 5945.00, 30, 10, 'c2e2d635-2b4e-4f92-9cd2-b8e2f8a7dd3f', 'g8a2e5b6-5c4f-4b8e-bd9e-4f7e5d9c1e3f'),
+	('j66f9a3b-1234-4f6e-bf8d-7c9e4d2f3e1a', 'Dados Eróticos', 'Juego de dados con posiciones y lugares', 32759.00, 40, 0, 'd2a8f6f2-0f94-4b53-8b6f-c8f9e3a4c2b1', 'h9e4b7d6-6d7f-4c8d-afe6-2f9e5c0b7d8f'),
+	('k77e3b4c-2345-4d8e-afe4-8c2d3b4f9a6d', 'Cartas para Parejas', 'Cartas con desafíos y preguntas íntimas', 24559.00, 20, 10, 'd2a8f6f2-0f94-4b53-8b6f-c8f9e3a4c2b1', 'd84b2b12-1f24-4db8-b44f-789d4f3eac68'),
+	('l88d9c7f-3456-4e8b-afe6-2f3b6a8e9d5c', 'Esposas con Forro de Peluche', 'Esposas ajustables con peluche suave', 5999.00, 15, 5, 'd2a8f6f2-0f94-4b53-8b6f-c8f9e3a4c2b1', 'f7d9e3b4-3c6f-4b8d-afe4-5a7c8d9e1a7b'),
+	('m99d8a7b-4567-4e8e-bf9d-4e3c9d2f8b1f', 'Anillo Vibrador', 'Anillo con vibración para el placer de ambos', 70559.00, 15, 10, 'f6b1c2e8-4d7a-4e68-8e3f-5d8f6c7e9b2a', 'e5b1c8d2-2f9d-4f7c-bf4e-2398f6b0d83c'),
+	('n10e2f4b-5678-4d9a-bc8e-3d7b4c5a2f1d', 'Arnés para Parejas', 'Arnés ajustable con vibración', 132559.00, 5, 15, 'f6b1c2e8-4d7a-4e68-8e3f-5d8f6c7e9b2a', 'g8a2e5b6-5c4f-4b8e-bd9e-4f7e5d9c1e3f'),
+	('o21f3c6d-6789-4d8e-ae6d-4c9f7a2d8b3f', 'Control Remoto para Juguetes', 'Control para sincronizar con juguetes de la marca', 98559.00, 10, 0, 'f6b1c2e8-4d7a-4e68-8e3f-5d8f6c7e9b2a', 'h9e4b7d6-6d7f-4c8d-afe6-2f9e5c0b7d8f');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
