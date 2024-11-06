@@ -30,6 +30,33 @@ CREAR
 
 
 
+MARCAS: 
+
+VER
+----------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:brnd="http://www.example.org/brands/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <brnd:getBrands/>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+----------
+
+CREAR
+-----------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:brnd="http://www.example.org/brands/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <brnd:createBrand>
+        <name>BRAND Aa</name>
+        </brnd:createBrand>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+------------------
 
 
 PRODUCTOS:
@@ -91,6 +118,20 @@ FILTRAR POR CATEGORIA
 
 ------------------
 
+FILTRAR POR MARCA
+------------------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:prod="http://www.example.org/products/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <prod:getProductsByBrand>
+            <brand_name>nombre_marca</brand_name>
+        </prod:getProductsByBrand>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+------------------
+
 
 CREAR
 -----------
@@ -103,8 +144,9 @@ CREAR
         <description></description>
         <price></price>
         <stock></stock>
-        <imageUrl></imageUrl>
-        <category_id></category_id>    
+        <discount></discount>
+        <category_id></category_id> 
+        <brand_id></brand_id>   
         </prod:createProduct>
     </soapenv:Body>
 </soapenv:Envelope>
@@ -124,8 +166,9 @@ ACTUALIZAR
         <description></description>
         <price></price>
         <stock></stock>
-        <imageUrl></imageUrl>
-        <category_id></category_id>    
+        <discount></discount>
+        <category_id></category_id> 
+        <brand_id></brand_id>      
         </prod:updateProduct>
     </soapenv:Body>
 </soapenv:Envelope>
