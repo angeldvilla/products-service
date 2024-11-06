@@ -1,0 +1,297 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Servicio de Catálogo de Productos",
+    "collectionId": "dded422b-f398-437a-9868-aa240917ca01",
+    "dateExported": "2024-11-06T15:10:43.832Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "d6d8b186-1dae-4cc2-aadd-7a59afae035a",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Obtener Categorias",
+            "url": "http://localhost:3001/categories",
+            "method": "POST",
+            "sortNum": 5000,
+            "created": "2024-11-06T14:26:34.654Z",
+            "modified": "2024-11-06T14:55:51.689Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:cat=\"http://www.example.org/categories/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <cat:getCategories />\n    </soapenv:Body>\n</soapenv:Envelope>",
+                "form": []
+            }
+        },
+        {
+            "_id": "6f6e2a2c-3dbf-4417-9214-d43a0d29fdd8",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Crear Categoria",
+            "url": "http://localhost:3001/categories",
+            "method": "POST",
+            "sortNum": 7500,
+            "created": "2024-11-06T15:00:37.655Z",
+            "modified": "2024-11-06T15:00:37.655Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:cat=\"http://www.example.org/categories/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <cat:createCategory>\n        <name>BSDM</name>\n        </cat:createCategory>\n    </soapenv:Body>\n</soapenv:Envelope>\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "a279ea8c-fdc8-4e6f-9f77-0f7a7e942cbe",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Obtener Marcas",
+            "url": "http://localhost:3001/brands",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-11-06T14:24:09.606Z",
+            "modified": "2024-11-06T14:58:07.592Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:brnd=\"http://www.example.org/brands/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <brnd:getBrands/>\n    </soapenv:Body>\n</soapenv:Envelope>",
+                "form": []
+            }
+        },
+        {
+            "_id": "126ebd35-ede1-4d2b-9970-812a9f66c58d",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Crear Marca",
+            "url": "http://localhost:3001/brands",
+            "method": "POST",
+            "sortNum": 12500,
+            "created": "2024-11-06T14:58:44.088Z",
+            "modified": "2024-11-06T14:59:40.555Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:brnd=\"http://www.example.org/brands/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <brnd:createBrand>\n        <name>BRAND Aa</name>\n        </brnd:createBrand>\n    </soapenv:Body>\n</soapenv:Envelope>\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "8553d02b-ab2c-44a8-a8c3-83f345b8090e",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Obtener Productos",
+            "url": "http://localhost:3001/products",
+            "method": "POST",
+            "sortNum": 13750,
+            "created": "2024-11-06T14:52:12.556Z",
+            "modified": "2024-11-06T15:05:51.902Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:prod=\"http://www.example.org/products/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <prod:getProducts />\n    </soapenv:Body>\n</soapenv:Envelope>",
+                "form": []
+            }
+        },
+        {
+            "_id": "3b66db53-711a-404c-83cc-096eb05ce0e3",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Ver Detalle de Producto",
+            "url": "http://localhost:3001/products",
+            "method": "POST",
+            "sortNum": 14375,
+            "created": "2024-11-06T15:07:00.226Z",
+            "modified": "2024-11-06T15:07:00.226Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:prod=\"http://www.example.org/products/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <prod:getProductDetails>\n        <id>l88d9c7f-3456-4e8b-afe6-2f3b6a8e9d5c</id>\n        </prod:getProductDetails>\n    </soapenv:Body>\n</soapenv:Envelope>",
+                "form": []
+            }
+        },
+        {
+            "_id": "84fbe84d-ee94-4b2c-a468-71943cf4c6d3",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Buscar producto por nombre",
+            "url": "http://localhost:3001/products",
+            "method": "POST",
+            "sortNum": 14687.5,
+            "created": "2024-11-06T15:07:40.962Z",
+            "modified": "2024-11-06T15:07:40.962Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:prod=\"http://www.example.org/products/\">\r\n    <soapenv:Header/>\r\n    <soapenv:Body>\r\n        <prod:getProductsByName>\r\n            <product_name>Vibrador</product_name>\r\n        </prod:getProductsByName>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>",
+                "form": []
+            }
+        },
+        {
+            "_id": "2282bf22-3509-404c-9701-802d55173455",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Filtrar productos por categoria",
+            "url": "http://localhost:3001/products",
+            "method": "POST",
+            "sortNum": 14843.8,
+            "created": "2024-11-06T15:08:12.081Z",
+            "modified": "2024-11-06T15:08:12.081Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:prod=\"http://www.example.org/products/\">\r\n    <soapenv:Header/>\r\n    <soapenv:Body>\r\n        <prod:getProductsByCategory>\r\n            <category_name>Juguetes</category_name>\r\n        </prod:getProductsByCategory>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>",
+                "form": []
+            }
+        },
+        {
+            "_id": "42056281-f882-4f0d-a848-1eab99234c0d",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Filtrar productos por marca",
+            "url": "http://localhost:3001/products",
+            "method": "POST",
+            "sortNum": 14921.9,
+            "created": "2024-11-06T15:09:12.136Z",
+            "modified": "2024-11-06T15:09:33.640Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:prod=\"http://www.example.org/products/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <prod:getProductsByBrand>\n            <brand_name>Lelo</brand_name>\n        </prod:getProductsByBrand>\n    </soapenv:Body>\n</soapenv:Envelope>",
+                "form": []
+            }
+        },
+        {
+            "_id": "980e32c9-e5b3-4ea4-898f-208327b58767",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Crear Producto",
+            "url": "http://localhost:3001/products",
+            "method": "POST",
+            "sortNum": 15000,
+            "created": "2024-11-06T14:57:41.256Z",
+            "modified": "2024-11-06T14:57:41.257Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:prod=\"http://www.example.org/products/\">\r\n    <soapenv:Header/>\r\n    <soapenv:Body>\r\n        <prod:createProduct>\r\n        <name>producto1</name>\r\n        <description>nuevo producto</description>\r\n        <price>66000</price>\r\n        <stock>33</stock>\r\n        <discount>33</discount>\r\n        <category_id>c2e2d635-2b4e-4f92-9cd2-b8e2f8a7dd3f</category_id> \r\n        <brand_id>f7d9e3b4-3c6f-4b8d-afe4-5a7c8d9e1a7b</brand_id>   \r\n        </prod:createProduct>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>",
+                "form": []
+            }
+        },
+        {
+            "_id": "d8bcc228-c4c5-4309-9123-e27862b5152b",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Actualizar Producto",
+            "url": "http://localhost:3001/products",
+            "method": "POST",
+            "sortNum": 17500,
+            "created": "2024-11-06T14:54:16.427Z",
+            "modified": "2024-11-06T15:03:28.878Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:prod=\"http://www.example.org/products/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <prod:updateProduct>\n        <id>i55d8c9a-7890-4d6b-a9e3-5e8b7c4f1d9e</id>\n        <name>Lubricante Jhonson</name>\n        <description>Jhonson bby</description>\n        <price>45000</price>\n        <stock>59</stock>\n        <discount>0</discount>\n        <category_id>c2e2d635-2b4e-4f92-9cd2-b8e2f8a7dd3f</category_id> \n        <brand_id>g8a2e5b6-5c4f-4b8e-bd9e-4f7e5d9c1e3f</brand_id>      \n        </prod:updateProduct>\n    </soapenv:Body>\n</soapenv:Envelope>",
+                "form": []
+            }
+        },
+        {
+            "_id": "677eceb6-e7dd-4a57-8267-5d06136a85c5",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Eliminar Producto",
+            "url": "http://localhost:3001/products",
+            "method": "POST",
+            "sortNum": 18750,
+            "created": "2024-11-06T15:04:40.676Z",
+            "modified": "2024-11-06T15:04:40.676Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:prod=\"http://www.example.org/products/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <prod:deleteProduct>\n        <id>i55d8c9a-7890-4d6b-a9e3-5e8b7c4f1d9e</id>\n        </prod:deleteProduct>\n    </soapenv:Body>\n</soapenv:Envelope>\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "3f5fdee7-ae81-46b7-85ef-b44c1117389d",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Ajustar Stock de Producto",
+            "url": "http://localhost:3001/products",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-11-06T15:05:29.788Z",
+            "modified": "2024-11-06T15:05:29.788Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "text/xml"
+                }
+            ],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:prod=\"http://www.example.org/products/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <prod:adjustStock>\n        <id>i55d8c9a-7890-4d6b-a9e3-5e8b7c4f1d9e</id>\n        <quantity>69</quantity>\n        </prod:adjustStock>\n    </soapenv:Body>\n</soapenv:Envelope>",
+                "form": []
+            }
+        }
+    ],
+    "ref": "AGWSis8LRWQEdRiqJT_EQT3Qb1Bx6Me0SOk8Sgm5WRZwaMA5O0aODzLLsu-xLojIexBPaTWJuWoD3dJLy82Kwg"
+}
