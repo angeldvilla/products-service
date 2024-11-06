@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
 const Category = require('../models/category');
+const Brand = require('../models/brand');
 const { Op } = require('sequelize');
 
 const productService = {
@@ -9,7 +10,7 @@ const productService = {
             getProducts: async function () {
                 try {
                     const products = await Product.findAll({
-                        include: [Category]
+                        include: [Category, Brand]
                     });
 
                     const productResponse = products.map(product => {
@@ -17,9 +18,11 @@ const productService = {
                             id: product.id,
                             nombre: product.name,
                             descripcion: product.description,
-                            precio: product.price,
+                            precio: `$${product.price} COP`,
                             cantidad: product.stock,
-                            categoria: product.Category ? product.Category.name : null
+                            descuento: `${product.discount}%`,
+                            categoria: product.Category ? product.Category.name : null,
+                            marca: product.Brand ? product.Brand.name : null
                         }
                     })
 
@@ -35,7 +38,7 @@ const productService = {
             getProductDetails: async function (args) {
                 try {
                     const product = await Product.findByPk(args.id, {
-                        include: [Category]
+                        include: [Category, Brand]
                     });
                     if (!product) {
                         return {
@@ -47,9 +50,11 @@ const productService = {
                         id: product.id,
                         nombre: product.name,
                         descripcion: product.description,
-                        precio: product.price,
+                        precio: `$${product.price} COP`,
                         cantidad: product.stock,
-                        categoria: product.Category ? product.Category.name : null
+                        descuento: `${product.discount}%`,
+                        categoria: product.Category ? product.Category.name : null,
+                        marca: product.Brand ? product.Brand.name : null
                     }
 
                     return { product: productResponse };
@@ -61,7 +66,7 @@ const productService = {
             },
 
 
-            /* Funciones para filtrar productos por categoria */
+            /* Funcion para filtrar productos por categoria */
             getProductsByCategory: async function (args) {
                 try {
                     const products = await Product.findAll({
@@ -88,8 +93,9 @@ const productService = {
                             id: product.id,
                             nombre: product.name,
                             descripcion: product.description,
-                            precio: product.price,
+                            precio: `$${product.price} COP`,
                             cantidad: product.stock,
+                            descuento: `${product.discount}%`,
                             categoria: product.Category ? product.Category.name : null
                         }
                     })
@@ -102,6 +108,48 @@ const productService = {
                 }
             },
 
+            /* Funcion para filtrar productos por marca */
+            getProductsByBrand: async function (args) {
+                try {
+                    const products = await Product.findAll({
+                        include: [{
+                            model: Brand,
+                            where: { 
+                                name: { 
+                                    [Op.like]: `%${args.brand_name}%`
+                                } 
+                            }
+                        }],
+                    });
+
+                    if (products.length === 0) {
+                        console.error('No se encontraron productos para la marca especificada');
+                        return {
+                           message: "No se encontraron productos para la marca especificada",
+                           products: []
+                        };
+                    }
+
+                    const productResponse = products.map(product => {
+                        return {
+                            id: product.id,
+                            nombre: product.name,
+                            descripcion: product.description,
+                            precio: `$${product.price} COP`,
+                            cantidad: product.stock,
+                            descuento: `${product.discount}%`,
+                            marca: product.Brand ? product.Brand.name : null
+                        }
+                    })
+
+                    return { products: productResponse };
+
+                } catch (error) {
+                    console.error('Error al obtener productos por marca:', error);
+                    throw new Error('Error al obtener productos por marca');
+                }
+            },
+
             /* Función para buscar un producto por nombre */
             getProductsByName: async function (args) {
                 try {
@@ -109,7 +157,7 @@ const productService = {
                         where: { name: {
                             [Op.like]: `%${args.product_name}%`
                         } },
-                        include: [Category],
+                        include: [Category, Brand],
                     });
             
                     if (products.length === 0) {
@@ -125,9 +173,11 @@ const productService = {
                             id: product.id,
                             nombre: product.name,
                             descripcion: product.description,
-                            precio: product.price,
+                            precio: `$${product.price} COP`,
                             cantidad: product.stock,
-                            categoria: product.Category ? product.Category.name : null
+                            descuento: `${product.discount}%`,
+                            categoria: product.Category ? product.Category.name : null,
+                            marca: product.Brand ? product.Brand.name : null
                         }
                     })
 
@@ -149,12 +199,14 @@ const productService = {
 
                     const newProduct = await Product.create(args);
                     const category = await Category.findOne({ where: { id: args.category_id } })
+                    const brand = await Brand.findOne({ where: { id: args.brand_id } })
 
                     return {
                         sucess: "Producto creado exitosamente",
                         productId: newProduct.id,
                         nombre: newProduct.name,
-                        categoria: category.name
+                        categoria: category.name,
+                        marca: brand.name
                     };
 
                 } catch (error) {
@@ -174,8 +226,9 @@ const productService = {
                     product.description = args.description || product.description;
                     product.price = args.price || product.price;
                     product.stock = args.stock || product.stock;
-                    product.imageUrl = args.imageUrl || product.imageUrl;
+                    product.discount = args.discount || product.discount;
                     product.category_id = args.category_id || product.category_id;
+                    product.brand_id = args.brand_id || product.brand_id;
 
                     const productUpdated = await product.save();
 
@@ -183,9 +236,11 @@ const productService = {
                         id: productUpdated.id,
                         nombre: productUpdated.name,
                         descripcion: productUpdated.description,
-                        precio: productUpdated.price,
+                        precio: `$${productUpdated.price} COP`,
                         cantidad: productUpdated.stock,
-                        categoria: productUpdated.Category ? productUpdated.Category.name : null
+                        descuento: `${productUpdated.discount}%`,
+                        categoria: productUpdated.Category ? productUpdated.Category.name : null,
+                        marca: product.Brand ? product.Brand.name : null
                     };
 
                     return {
