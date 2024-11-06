@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="BrandService"
+             targetNamespace="http://www.example.org/brands/"
+             xmlns:tns="http://www.example.org/brands/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:tns="http://www.example.org/brands/"
+                targetNamespace="http://www.example.org/brands/">
+
+
+     <!-- Define Modelo de Marcas -->
+        <xsd:complexType name="Brand">
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:string"/>
+                <xsd:element name="name" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+
+        <!-- Define Array de Marcas -->
+        <xsd:complexType name="BrandArray">
+            <xsd:sequence>
+                <xsd:element name="brand" type="tns:Brand" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+
+    </xsd:schema>
+
+
+    <!-- Mensajes para obtener todas las marcas -->
+    <message name="getBrandsRequest"/>
+    <message name="getBrandsResponse">
+        <part name="brands" type="tns:BrandArray"/>
+    </message>
+
+    <!-- Mensajes para crear una nueva marca -->
+    <message name="createBrandRequest">
+        <part name="name" type="xsd:string"/>
+    </message>
+    <message name="createBrandResponse">
+        <part name="success" type="xsd:string"/>
+        <part name="brandId" type="xsd:string"/>
+        <part name="name" type="xsd:string"/>
+    </message>
+
+
+    <portType name="BrandsPortType">
+        <operation name="getBrands">
+            <input message="tns:getBrandsRequest"/>
+            <output message="tns:getBrandsResponse"/>
+        </operation>
+        <operation name="createBrand">
+            <input message="tns:createBrandRequest"/>
+            <output message="tns:createBrandResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="BrandsBinding" type="tns:BrandsPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getBrands">
+            <soap:operation soapAction="urn:getBrands"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="createBrand">
+            <soap:operation soapAction="urn:createBrand"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="BrandService">
+        <port name="BrandPort" binding="tns:BrandsBinding">
+            <soap:address location="http://localhost:3001/brands"/>
+        </port>
+    </service>
+
+</definitions>
