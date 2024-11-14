@@ -19,7 +19,7 @@ const Product = sequelize.define('Product', {
         allowNull: false,
     },
     price: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.BIGINT,
         allowNull: false,
     },
     stock: {
