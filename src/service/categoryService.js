@@ -21,7 +21,7 @@ const categoryService = {
 
                 } catch (error) {
                     console.error('Error al obtener categorías:', error);
-                    throw new Error('Error al obtener categorías:');
+                    return { message: 'Error al obtener categorías:' };
                 }
             },
             createCategory: async function (args) {
@@ -42,7 +42,7 @@ const categoryService = {
 
                 } catch (error) {
                     console.error('Error al crear la categoría:', error);
-                    throw new Error('Error al crear la categoría:');
+                    return { message: 'Error al crear la categoría:' };
                 }
             },
         }
