@@ -52,5 +52,5 @@ sequelize.authenticate()
 
     })
     .catch(err => {
-        console.error('No se puede conectar a la base de datos:\n', err);
+        console.error('No se puede conectar a la base de datos: \n', err);
     });
