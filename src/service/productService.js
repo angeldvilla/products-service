@@ -29,8 +29,8 @@ const productService = {
                     return { products: productResponse };
 
                 } catch (error) {
-                    console.error('Error al obtener productos:', error);
-                    throw new Error('Error al obtener productos');
+                    console.log('Error al obtener productos:', error);
+                    return { message: 'Error al obtener productos' };
                 }
             },
 
@@ -60,11 +60,10 @@ const productService = {
                     return { product: productResponse };
 
                 } catch (error) {
-                    console.error('Error al obtener detalles del producto:', error);
-                    throw new Error('Error al obtener detalles del producto');
+                    console.log('Error al obtener detalles del producto:', error);
+                    return { message: 'Error al obtener detalles del producto' };
                 }
             },
-
 
             /* Funcion para filtrar productos por categoria */
             getProductsByCategory: async function (args) {
@@ -103,8 +102,8 @@ const productService = {
                     return { products: productResponse };
 
                 } catch (error) {
-                    console.error('Error al obtener productos por categoría:', error);
-                    throw new Error('Error al obtener productos por categoría');
+                    console.log('Error al obtener productos por categoría:', error);
+                    return { message: 'Error al obtener productos por categoría' };
                 }
             },
 
@@ -145,8 +144,8 @@ const productService = {
                     return { products: productResponse };
 
                 } catch (error) {
-                    console.error('Error al obtener productos por marca:', error);
-                    throw new Error('Error al obtener productos por marca');
+                    console.log('Error al obtener productos por marca:', error);
+                    return { message: 'Error al obtener productos por marca' };
                 }
             },
 
@@ -183,8 +182,8 @@ const productService = {
 
                     return { products: productResponse };
                 } catch (error) {
-                    console.error('Error al obtener el producto por nombre:', error);
-                    throw new Error('Error al obtener el producto por nombre');
+                    console.log('Error al obtener el producto por nombre:', error);
+                    return { message: 'Error al obtener el producto por nombre' };
                 }
             },
 
@@ -210,10 +209,11 @@ const productService = {
                     };
 
                 } catch (error) {
-                    console.error('Error al crear el producto:', error);
-                    throw new Error('Error al crear el producto:');
+                    console.log('Error al crear el producto:', error);
+                    return { message: 'Error al crear el producto:' };
                 }
             },
+
             updateProduct: async function (args) {
                 try {
                     const product = await Product.findByPk(args.id);
@@ -249,10 +249,11 @@ const productService = {
                     };
 
                 } catch (error) {
-                    console.error('Error al actualizar el producto:', error);
-                    throw new Error('Error al actualizar el producto');
+                    console.log('Error al actualizar el producto:', error);
+                    return { message: 'Error al actualizar el producto' };
                 }
             },
+
             deleteProduct: async function (args) {
                 try {
                     const product = await Product.findByPk(args.id);
@@ -263,25 +264,61 @@ const productService = {
                     return { success: "Producto eliminado exitosamente" };
 
                 } catch (error) {
-                    console.error('Error al eliminar el producto:', error);
-                    throw new Error('Error al eliminar el producto');
+                    console.log('Error al eliminar el producto:', error);
+                    return { message: 'Error al eliminar el producto' };
                 }
             },
+
+            newStock: async function (args) {
+                try {
+                    const product = await Product.findByPk(args.id);
+                    if (!product) {
+                        return { message: 'Producto no encontrado' };
+                    }
+
+                    if(args.quantity <= 0) {
+                        return { message: 'El stock no puede ser negativo o cero' }
+                    }
+
+                    const newStock = product.stock + parseInt(args.quantity);
+
+                    // Actualizar el stock de producto
+                    product.stock = newStock;
+            
+                    const productUpdated = await product.save();
+
+                    return {
+                        success: "Stock ajustado con éxito",
+                        productId: args.id,
+                        nombre: productUpdated.name,
+                        cantidad: productUpdated.stock
+                    };
+
+                } catch (error) {
+                    console.log('Error al ajustar el stock de productos:', error);
+                    return { error: 'Error al ajustar el stock de productos' };
+                }
+            },
+
             adjustStock: async function (args) {
                 try {
                     const product = await Product.findByPk(args.id);
                     if (!product) {
-                        return { message: 'Producto no encontrado' }
+                        return { message: 'Producto no encontrado' };
                     }
 
-                    const newStock = product.stock + args.quantity;
-
-                    if (newStock < 0) {
-                        throw new Error('El stock no puede ser negativo');
+                    if(product.stock < args.quantity) {
+                        return { message: 'Stock insuficiente' }
                     }
 
-                    // Actualizar el stock de producto
-                    product.stock = newStock || product.stock;
+                    const newStock = product.stock - args.quantity;
+
+                    if(!args.quantity) {
+                        // Actualizar el stock de producto
+                        product.stock = product.stock;
+                    } else {
+                        product.stock = newStock;
+                    }
 
                     const productUpdated = await product.save();
 
@@ -293,8 +330,8 @@ const productService = {
                     };
 
                 } catch (error) {
-                    console.error('Error al ajustar el stock de productos:', error);
-                    throw new Error('Error al ajustar el stock de productos');
+                    console.log('Error al ajustar el stock de productos:', error);
+                    return { error: 'Error al ajustar el stock de productos' };
                 }
             },
         }
