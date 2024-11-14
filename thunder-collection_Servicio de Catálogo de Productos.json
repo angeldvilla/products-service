@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "Servicio de Catálogo de Productos",
     "collectionId": "dded422b-f398-437a-9868-aa240917ca01",
-    "dateExported": "2024-11-06T15:10:43.832Z",
+    "dateExported": "2024-11-14T00:28:59.098Z",
     "version": "1.2",
     "folders": [],
     "requests": [
@@ -147,7 +147,7 @@
             "method": "POST",
             "sortNum": 14687.5,
             "created": "2024-11-06T15:07:40.962Z",
-            "modified": "2024-11-06T15:07:40.962Z",
+            "modified": "2024-11-13T22:26:33.507Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -156,7 +156,7 @@
             ],
             "body": {
                 "type": "xml",
-                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:prod=\"http://www.example.org/products/\">\r\n    <soapenv:Header/>\r\n    <soapenv:Body>\r\n        <prod:getProductsByName>\r\n            <product_name>Vibrador</product_name>\r\n        </prod:getProductsByName>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:prod=\"http://www.example.org/products/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <prod:getProductsByName>\n            <product_name>Vibrador</product_name>\n        </prod:getProductsByName>\n    </soapenv:Body>\n</soapenv:Envelope>",
                 "form": []
             }
         },
@@ -169,7 +169,7 @@
             "method": "POST",
             "sortNum": 14843.8,
             "created": "2024-11-06T15:08:12.081Z",
-            "modified": "2024-11-06T15:08:12.081Z",
+            "modified": "2024-11-13T22:26:39.752Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -178,7 +178,7 @@
             ],
             "body": {
                 "type": "xml",
-                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:prod=\"http://www.example.org/products/\">\r\n    <soapenv:Header/>\r\n    <soapenv:Body>\r\n        <prod:getProductsByCategory>\r\n            <category_name>Juguetes</category_name>\r\n        </prod:getProductsByCategory>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:prod=\"http://www.example.org/products/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <prod:getProductsByCategory>\n            <category_name>Juguetes</category_name>\n        </prod:getProductsByCategory>\n    </soapenv:Body>\n</soapenv:Envelope>",
                 "form": []
             }
         },
@@ -271,15 +271,32 @@
             }
         },
         {
+            "_id": "7f3b7192-2362-4f1b-852f-9f47d9e2e9f6",
+            "colId": "dded422b-f398-437a-9868-aa240917ca01",
+            "containerId": "",
+            "name": "Ajustar Stock de Productos",
+            "url": "http://localhost:3001/products",
+            "method": "POST",
+            "sortNum": 24375,
+            "created": "2024-11-13T21:29:18.565Z",
+            "modified": "2024-11-13T22:27:17.818Z",
+            "headers": [],
+            "body": {
+                "type": "xml",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:prod=\"http://www.example.org/products/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <prod:newStock>\n        <id>l88d9c7f-3456-4e8b-afe6-2f3b6a8e9d5c</id>\n        <quantity>6</quantity>\n        </prod:newStock>\n    </soapenv:Body>\n</soapenv:Envelope>",
+                "form": []
+            }
+        },
+        {
             "_id": "3f5fdee7-ae81-46b7-85ef-b44c1117389d",
             "colId": "dded422b-f398-437a-9868-aa240917ca01",
             "containerId": "",
-            "name": "Ajustar Stock de Producto",
+            "name": "Disminuir Stock de Producto",
             "url": "http://localhost:3001/products",
             "method": "POST",
             "sortNum": 30000,
             "created": "2024-11-06T15:05:29.788Z",
-            "modified": "2024-11-06T15:05:29.788Z",
+            "modified": "2024-11-13T22:28:57.247Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -288,10 +305,10 @@
             ],
             "body": {
                 "type": "xml",
-                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:prod=\"http://www.example.org/products/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <prod:adjustStock>\n        <id>i55d8c9a-7890-4d6b-a9e3-5e8b7c4f1d9e</id>\n        <quantity>69</quantity>\n        </prod:adjustStock>\n    </soapenv:Body>\n</soapenv:Envelope>",
+                "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n    xmlns:prod=\"http://www.example.org/products/\">\n    <soapenv:Header/>\n    <soapenv:Body>\n        <prod:adjustStock>\n        <id>l88d9c7f-3456-4e8b-afe6-2f3b6a8e9d5c</id>\n        <quantity>11</quantity>\n        </prod:adjustStock>\n    </soapenv:Body>\n</soapenv:Envelope>",
                 "form": []
             }
         }
     ],
-    "ref": "AGWSis8LRWQEdRiqJT_EQT3Qb1Bx6Me0SOk8Sgm5WRZwaMA5O0aODzLLsu-xLojIexBPaTWJuWoD3dJLy82Kwg"
+    "ref": "AGWSis8LRWQEdRiqJT_EQT9VKlA7m5m5PsD5HhKoR-Mi0qR0vbOEv--Jb2dns_NTm6eLQoKPf1jJBVkHfN1N0g"
 }
