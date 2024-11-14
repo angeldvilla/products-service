@@ -190,9 +190,23 @@ ELIMINAR
 
 ------------------
 
-
-
 AJUSTAR STOCK
+-----------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:prod="http://www.example.org/products/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <prod:newStock>
+        <id></id>
+        <quantity></quantity>
+        </prod:newStock>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+-----------
+
+
+DISMINUIR STOCK
 -----------
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
     xmlns:prod="http://www.example.org/products/">
