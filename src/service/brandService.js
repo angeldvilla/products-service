@@ -21,7 +21,7 @@ const brandService = {
 
                 } catch (error) {
                     console.error('Error al obtener marcas:', error);
-                    throw new Error('Error al obtener marcas:');
+                    return { message: 'Error al obtener marcas' };
                 }
             },
             createBrand: async function (args) {
@@ -42,7 +42,7 @@ const brandService = {
 
                 } catch (error) {
                     console.error('Error al crear la marca:', error);
-                    throw new Error('Error al crear la marca:');
+                    return { messsage: 'Error al crear la marca' };
                 }
             },
         }
